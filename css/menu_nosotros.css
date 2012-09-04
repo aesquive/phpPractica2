@@ -1,0 +1,8 @@
+ul#submenu{height:1%;margin:0;padding:0 10px;list-style:none;overflow:hidden;}
+ul#submenu li{float:left;margin:0;border-left:1px solid #7F7F7F;border-right:1px solid #0D5995;}
+ul#submenu li:first-child{border-left:0;}
+ul#submenu li:last-child{border-right:0;}
+ul#submenu li a{color:#0D5995;}
+ul#submenu li.activo a{text-decoration:underline;}
+ul#submenu li a{display:block;padding:5px 10px;text-decoration:none;}
+ul#submenu li a:hover, ul#submenu li.activo:hover{text-decoration:underline;}

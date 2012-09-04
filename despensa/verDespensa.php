@@ -12,7 +12,7 @@ session_start();
 
 if(!$_SESSION  || !$_SESSION["tipoOrdenacion"]){
     
-    $_SESSION["nombreBoton"]="Ordenar A-Z";
+    $_SESSION["nombreBoton"]="A-Z";
     $_SESSION["consultaOrdenacion"] ="SELECT * FROM Articulos ORDER BY Nombre ASC;";
     $_SESSION["tipoOrdenacion"]=1;
 
@@ -23,12 +23,12 @@ function cambiarOrden(){
                  
                         switch ($_SESSION["tipoOrdenacion"]){
                             case 1:
-                                $_SESSION["nombreBoton"]="Ordenar Z-A";
+                                $_SESSION["nombreBoton"]="Z-A";
                                 $_SESSION["consultaOrdenacion"]="SELECT * FROM Articulos ORDER BY Nombre DESC";
                                 $_SESSION["tipoOrdenacion"]=2;
                                 break;
                             case 2:
-                                $_SESSION["nombreBoton"]="Ordenar A-Z";
+                                $_SESSION["nombreBoton"]="A-Z";
                                 $_SESSION["consultaOrdenacion"]="SELECT * FROM Articulos ORDER BY Nombre ASC";
                                 $_SESSION["tipoOrdenacion"]=1;
                                 break;
@@ -50,18 +50,21 @@ function cambiarOrden(){
                 window.location="verDespensa.php";
             }    
         </script>
+        <link type="text/css" rel="stylesheet" href="../css/despensa.css" media="all"/>
+        
     </head>
-    <body>
-        <table>
+    <body id="container">
+        <h1 id="titulo"> Inventario de Articulos</h1>
+        <table id="tablaContenido" border="1">
             <thead>
-            <th>Id</th>
-            <th>
-                <input type="button" value="<?php echo $_SESSION["nombreBoton"]; ?>" onclick="ordenarElementos()"/>
-                <br/>
+            <th  width="20%">
+                <a>Id</a>
+            </th>
+            <th width="30%">
                 <a>Nombre</a>
             </th>
-            <th>Departamento</th>
-            <th>Cantidad</th>
+            <th width="30%"><a>Departamento</a></th>
+            <th width="20%"><a>Cantidad</a></th>
         </thead>
         
         <tbody>
@@ -73,6 +76,13 @@ function cambiarOrden(){
                 </tr>
                 <?php endwhile; ?>
         </tbody>
+        <tfoot>
+            <th></th>
+            <th>
+                <input type="button" value="<?php echo $_SESSION["nombreBoton"]; ?>" onclick="ordenarElementos()"/></th>
+            <th></th>
+            <th></th>
+        </tfoot>
     </table>
 </body>
 </html>

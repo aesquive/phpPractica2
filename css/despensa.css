@@ -1,0 +1,31 @@
+
+#container{
+    
+}
+
+
+#titulo{
+    font-size: 36px;
+    text-align: center;
+    margin-top: 10%;
+}
+
+#tablaContenido{
+    width: 75%;
+    background-color: lightgrey;
+    margin-left: 10%;
+    margin-top: 5%
+}
+
+
+#tablaContenido thead th{
+    background-color: lightslategrey;
+}
+
+#tablaContenido thead th a{ 
+    font-size:large;
+}
+
+#tablaContenido tbody td{
+    font-style: oblique;
+}

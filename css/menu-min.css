@@ -1,0 +1,17 @@
+/* -------------------------------------------------------------
+X-systec
+Diseño | Tecnología | Estrategia | Sentido Común
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Autor: González Moreno, Eduardo
+e-mail: eduardo.nitz333@gmail.com
+Descripción: Diseño básico de un simple menu
+Versión: 1.0
+Fecha: 23 may, 2010
+------------------------------------------------------------- */
+ul#menu{height:1%;margin:0;padding:0 10px;list-style:none;overflow:auto;}
+ul#menu li{float:left;margin:0;border:1px solid #1175AE;border-right:1px solid #0D5995;background-color:#0F67A1;}
+ul#menu li:last-child{border-right:1px solid #1175AE;}
+ul#menu li.activo{background-color:#5DB0E6;}
+ul#menu li a{display:block;padding:5px 10px;text-decoration:none;color:#FFF;}
+ul#menu li a:hover{text-shadow:2px 1px 0 #000;}
+ul#menu li[class="activo"] a{text-shadow:none;}
