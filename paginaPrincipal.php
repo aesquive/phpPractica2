@@ -5,7 +5,7 @@ session_start();
 $conexion = sqlite_open('db/favoritos.db') or die('no se ha podido establecer la conexión');
 /* Creamos una consulta para obtener los datos de la tabla favoritos */
 //IdFavorito ,IdUsuario ,Titulo ,Url ,Descripcion,Comentarios ,Categoria,Valoracion 
-$consulta ="SELECT * FROM Favoritos WHERE IdUsuario=".$_SESSION["IdUsuario"];
+$consulta = "SELECT * FROM Favoritos WHERE IdUsuario=" . $_SESSION["IdUsuario"];
 /* Ejecutamos la consulta */
 $resQuery = sqlite_query($conexion, $consulta);
 ?>
@@ -19,8 +19,19 @@ $resQuery = sqlite_query($conexion, $consulta);
         <meta http-equiv="content-script-type" content="text/javascript">
         <meta http-equiv="content-style-type" content="text/css">
         <title>Favoritos <?php echo $_SESSION["usuario"]; ?></title>
+        <link href="jqueryToastMessages/resources/css/jquery.toastmessage.css" rel="stylesheet" type="text/css" />
         <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
+        <script src="jqueryToastMessages/javascript/jquery.toastmessage.js" type="text/javascript"></script>
         <script>
+            $(document).ready(function(){
+                var mensaje=$("#mensajeAlerta").attr("value");
+                if(mensaje!=""){
+                    $().toastmessage('showNoticeToast',$("#mensajeAlertaPrincipal").attr("value"));
+                }
+            });
+            
+        
             function preguntarEliminar(idFavorito){
                 var confirmacion=confirm("¿Realmente quieres eliminar el registro?");
                 if(confirmacion){
@@ -29,10 +40,12 @@ $resQuery = sqlite_query($conexion, $consulta);
                 }
                 
             }
-    </script>
+            
+        </script>
     </head>
     <body>
         <div id="container">
+            <input type="hidden" id="mensajeAlertaPrincipal" value="<?php echo $_SESSION["mensaje"]; ?>">
             <table>
                 <tr>
                     <td width="70%"><h2>Links favoritos de <?php echo $_SESSION["usuario"]; ?></h2></td>
@@ -40,7 +53,6 @@ $resQuery = sqlite_query($conexion, $consulta);
                     <td width="10%"><a href="php/cerrarSesion.php">Cerrar Sesión</a></td>
                 </tr>
             </table>
-            <div id="mensaje"><a><?php echo $_SESSION["mensaje"]; ?></a></div>
             <table id="tabla">
                 <thead>
                     <tr>
@@ -60,12 +72,12 @@ $resQuery = sqlite_query($conexion, $consulta);
                         <tr> 
                             <td><?php echo $indice++; ?> </td>
                             <?php foreach ($res as $key => $value): ?>
-                                <?php if ($key !=='IdUsuario' && $key !== 'IdFavorito'): ?>
+                                <?php if ($key !== 'IdUsuario' && $key !== 'IdFavorito'): ?>
                                     <td><?php echo ($key == 'Url') ? "<a href='$value'  target='_blank'>$value</a>" : $value; ?></td>
-                                    <?php endif; ?>
+                                <?php endif; ?>
                             <?php endforeach; ?>
-                                    <td><span><a onclick="preguntarEliminar(<?php echo $res["IdFavorito"]; ?>)" href="#">Eliminar</a> | <a href="editarFavorito.php?id=<?php echo $res["IdFavorito"]; ?>">Editar</a></span></td>
-                                    
+                            <td><span><a onclick="preguntarEliminar(<?php echo $res["IdFavorito"]; ?>)" href="#">Eliminar</a> | <a href="editarFavorito.php?id=<?php echo $res["IdFavorito"]; ?>">Editar</a></span></td>
+
                         </tr>
                     <?php endwhile; ?>
                 </tbody>

@@ -16,7 +16,7 @@ if($usuarioAcreditado!=null){
     $_SESSION["IdUsuario"]=$usuarioAcreditado;
     $_SESSION["usuario"]=$_POST["nick"];
     $_SESSION["password"]=$_POST["password"];
-    $_SESSION["mensaje"]="";
+    $_SESSION["mensaje"]="Bienvenido ".$_SESSION["usuario"];
     header("Location: ../paginaPrincipal.php");
 }else{
     //mandamos un mensaje al usuario
