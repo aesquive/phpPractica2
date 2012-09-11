@@ -17,8 +17,7 @@ if (!$_SESSION || !$_SESSION["mensaje"]) {
             $(document).ready(function(){
                 var mensaje=$("#mensajeAlerta").attr("value");
                 if(mensaje!=""){
-                    
-                $().toastmessage('showErrorToast',$("#mensajeAlerta").attr("value"));
+                  $().toastmessage('showErrorToast',$("#mensajeAlerta").attr("value"));
                 }
             });
             
@@ -27,6 +26,7 @@ if (!$_SESSION || !$_SESSION["mensaje"]) {
     <body >
         <div id="container">
             <input type="hidden" id="mensajeAlerta" value="<?php echo $_SESSION["mensaje"]; ?>"/>
+            
             <form action="php/login.php" method="post" >
                 <table>
                     <tbody>

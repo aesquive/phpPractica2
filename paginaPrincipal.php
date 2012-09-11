@@ -1,11 +1,51 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
+
 session_start();
+$datos = $_GET;
+extract($_GET, EXTR_PREFIX_SAME, 'add');
+
+$booleanReodenamiento=false;
+
+if(!isset($tipoOrden)){
+    $tipoOrden=1;
+    $booleanReodenamiento=true;
+}
+echo $tipoOrden;
+
+$reordenValoracion;
+$reordenTitulo;
+$consulta="";
+switch ($tipoOrden){
+    case 1:
+        $consulta = "SELECT * FROM Favoritos WHERE IdUsuario=" . $_SESSION["IdUsuario"]."ORDER BY Titulo ASC";
+        $reordenValoracion=3;
+        $reordenTitulo=2;
+        break;
+    case 2:
+        $consulta = "SELECT * FROM Favoritos WHERE IdUsuario=" . $_SESSION["IdUsuario"]."ORDER BY Titulo DESC";
+        $reordenValoracion=3;
+        $reordenTitulo=1;
+        break;
+    case 3:
+        $consulta = "SELECT * FROM Favoritos WHERE IdUsuario=" . $_SESSION["IdUsuario"]."ORDER BY Valoracion ASC";
+        $reordenValoracion=4;
+        $reordenTitulo=1;
+        break;
+    case 4:
+        $consulta = "SELECT * FROM Favoritos WHERE IdUsuario=" . $_SESSION["IdUsuario"]."ORDER BY Valoracion DESC";
+        $reordenValoracion=3;
+        $reordenTitulo=1;
+        break;
+    
+}
+if(!$booleanReodenamiento){
+    $_SESSION["mensaje"]="Reordenamiento satisfactorio";
+}
+
 /* Establecer una conexion a favoritos.db */
 $conexion = sqlite_open('db/favoritos.db') or die('no se ha podido establecer la conexión');
 /* Creamos una consulta para obtener los datos de la tabla favoritos */
-//IdFavorito ,IdUsuario ,Titulo ,Url ,Descripcion,Comentarios ,Categoria,Valoracion 
-$consulta = "SELECT * FROM Favoritos WHERE IdUsuario=" . $_SESSION["IdUsuario"];
 /* Ejecutamos la consulta */
 $resQuery = sqlite_query($conexion, $consulta);
 ?>
@@ -62,7 +102,7 @@ $resQuery = sqlite_query($conexion, $consulta);
                         <th scope="col">Descripción</th>
                         <th scope="col">Comentarios</th>
                         <th scope="col">Categoria</th>
-                        <th scope="col">Valoración</th>
+                        <th scope="col"><a href="paginaPrincipal.php?tipoOrden=<?php echo $reordenValoracion;?>">Valoración</a></th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -81,9 +121,18 @@ $resQuery = sqlite_query($conexion, $consulta);
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
+                <tfoot>
+                <th></th>
+                <th><input type="button" onclick="window.location.href='paginaPrincipal.php?tipoOrden=<?php echo $reordenTitulo;?>'" value="Reordenar"/></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                </tfoot>
             </table>
 
         </div>
     </body>
 </html>
-<?php unset($_SESSION['AccFavorito']); ?>

@@ -29,12 +29,12 @@ session_start();
                         <label class="titulo" for="nombre">Título<span class="requerido">*</span></label>
                         <div>
                             <span class="completo">
-                                <input id="titulo" name="titulo" value="">
+                                <input required="true" id="titulo" name="titulo" value="">
                                 <label for="titulo">Título del link</label>
                             </span>
 
                             <span class="completo">
-                                <input id="url" name="url" value="http://">
+                                <input required="true" id="url" name="url" value="http://">
                                 <label for="url">URL</label>
                             </span>
                         </div>
@@ -64,7 +64,7 @@ session_start();
                                 <label for="categoria">Categoría</label>
                             </span>
                             <span class="completo" id="range">
-                                <input type='range' id='valoracion' name='valoracion' value='0' min='0' max='10' step='1'>
+                                <input required="true" type='range' id='valoracion' name='valoracion' value='0' min='0' max='10' step='1'>
                                 <p><span>0</span> <span>10</span></p>
                                 <label for="valoracion">Valoración</label>
                             </span>
